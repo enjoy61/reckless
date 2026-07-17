@@ -1,0 +1,86 @@
+{{- $type := .Type }}
+
+<!-- 前提：Section内Page要么全为Node，要么全非Node -->
+{{- $subsequence_is_leaf2 := true }}
+{{- range .InputEntries }}
+    {{- if .IsNode }}
+        {{- $subsequence_is_leaf2 = false }}
+    {{- end }}
+{{- end }}
+
+{{- if eq $subsequence_is_leaf2 true }}
+    <!-- 子节点非Node使用列表 -->
+    <div class="sidebar">
+        <ul class="list-group list-group-flush">
+        {{- range .InputEntries }}
+            <li class="list-group-item"><a href="{{- .RelPermalink }}" style="text-decoration: none;"> {{- .Title }} </a></li>
+        {{- end }}
+        </ul>
+    </div>
+{{- else }}
+    <!-- 子节点为Node使用Accordion -->
+    <!-- accordion flush top level I -->
+    {{- $aft_i := (print "accordionFlushTop-" $type) }}
+    <div class="sidebar accordion accordion-flush" id="{{- $aft_i}}">
+        {{- range .InputEntries }}
+            <!-- accordion under control level I -->
+            {{- $auc_i := (print "section-" (md5 .Title) "-" $type) }}
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{- $auc_i }}" aria-expanded="true" aria-controls="{{- $auc_i }}">
+                        {{- .Title }}
+                    </button>
+                </h2>
+
+                <div id="{{- $auc_i }}" class="accordion-collapse collapse" data-bs-parent="#{{- $aft_i}}">
+                    <div class="accordion-body">
+                        {{- partial "inline/list/walk.html" (dict "AllLeaves" .Pages "SubType" $type) }}
+                    </div>
+                </div>
+            </div>
+        {{- end }}
+    </div>
+{{- end }}
+
+<!-- 传入的一定是Section -->
+{{- define "_partials/inline/list/walk.html" }}
+    {{- $sub_type := .SubType }}
+    {{- $subsequence_is_leaf := true }}
+    {{- range .AllLeaves }}
+        {{- if .IsNode }}
+            {{- $subsequence_is_leaf = false }}
+        {{- end }}
+    {{- end }}
+
+    {{- if eq $subsequence_is_leaf true }}
+        <!-- 已递归到最深处 -->
+        <ul class="list-group">
+            {{- range .AllLeaves }}
+                <li class="list-group-item"><a href="{{- .RelPermalink }}" style="text-decoration: none;"> {{- .Title }} </a></li>
+            {{- end }}
+        </ul>
+    {{- else }}
+        <!-- 继续递归 -->
+        <!-- accordion flush top level II -->
+        {{- $aft_ii := (print "accordionFlushTop-" (md5 .Title) "-" $sub_type) }}
+        <div class="accordion accordion-flush" id="{{- $aft_ii }}">
+            {{- range .AllLeaves }}
+                <!-- accordion under control level II -->
+                {{- $auc_ii := (print "section-" (md5 .Title) "-" $sub_type) }}
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{- $auc_ii }}" aria-expanded="false" aria-controls="{{- $auc_ii }}">
+                            {{- .Title }}
+                        </button>
+                    </h2>
+
+                    <div id="{{- $auc_ii }}" class="accordion-collapse collapse" data-bs-parent="#{{- $aft_ii }}">
+                        <div class="accordion-body">
+                            {{- partial "inline/list/walk.html" (dict "AllLeaves" .Pages "SubType" $sub_type) }}
+                        </div>
+                    </div>
+                </div>
+            {{- end }}
+        </div>
+    {{- end }}
+{{- end }}

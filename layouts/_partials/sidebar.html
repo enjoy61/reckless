@@ -1,0 +1,9 @@
+{{ range where .Site.Sections "Section" "online-course-notes" }}
+   {{ partial "chapters.html" (dict "InputEntries" .Pages "Type" "sidebar") }}
+{{ end }}
+
+
+{{ $built := resources.Get "js/sidebar.js" | js.Build "main-sidebar.js" | minify | fingerprint "sha512" }}
+{{ with $built }}
+    <script src="{{ $built.RelPermalink }}" integrity="{{ $built.Data.Integrity }}" crossorigin="anonymous"></script>
+{{ end }}

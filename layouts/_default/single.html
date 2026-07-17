@@ -1,0 +1,13 @@
+{{ define "main" }}
+  <div class="container">
+  {{ if eq .Section "online-course-notes" }}
+    {{ partial "body/note.html" . }}
+  {{ else if eq .Section "recent" }}
+    {{ partial "body/recent-body.html" . }}
+  {{ else if eq .Section "about" }}
+    {{ partial "body/about-body.html" . }}
+  {{ end }}
+  
+  {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+  </div>
+{{ end }}

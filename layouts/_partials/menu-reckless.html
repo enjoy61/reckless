@@ -1,0 +1,29 @@
+<ul class="nav justify-content-center border-bottom pb-3">
+  {{ range .Site.Menus.main }}
+    {{ if .HasChildren }}
+    <li class="nav-item dropdown-center nav-item-style">
+        <a href="#" class="nav-link dropdown-toggle-s nav-dropdown-toggle" id="{{ .Identifier }}" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ .Name }}
+        </a>
+        
+        {{ $divider_flag := 0 }}
+        <ul class="dropdown-menu" style="position: fixed; z-index: 2000;">
+          {{ range .Children }}
+            {{ if eq $divider_flag 0 }}
+              {{ $divider_flag = 1 }}
+            {{ else }}
+              <li><hr class="dropdown-divider"></li>
+            {{ end }}
+            <li><a class="dropdown-item" href="{{ .URL }}">{{ .Name }}</a></li>
+          {{ end }}
+        </ul>
+    </li>
+    {{ else }}
+      <li class="nav-item nav-item-style">
+        <a class="nav-link" href="{{ .URL }}" id="{{ .Identifier }}">
+          {{ .Name }}
+        </a>
+      </li>
+    {{ end }}
+  {{ end }}
+</ul>

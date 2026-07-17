@@ -1,0 +1,12 @@
+{{ define "main" }}
+<div class="container" style="margin-top: 10px;">
+
+  <div class="card border-warning mb-3">
+    <div class="card-header bg-transparent border-warning">{{ partial "breadcrumb.html" . }}</div>
+    <div class="card-body">
+      {{ partial "chapters.html" (dict "InputEntries" .Pages "Type" "list") }}
+    </div>  
+  </div>
+
+</div>
+{{ end }}

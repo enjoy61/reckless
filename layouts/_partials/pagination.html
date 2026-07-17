@@ -1,0 +1,26 @@
+{{ if or .NextInSection .PrevInSection }}
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center" style="margin-bottom: 0;">
+
+        {{ with .NextInSection }}
+        <li class="page-item disabled">
+            <a class="page-link">上一篇</a>
+        </li>
+
+        <li class="page-item"> 
+            <a class="page-link" href="{{ .Permalink }}">{{ .Title }}</a>
+        </li>
+        {{ end }}
+
+        {{ with .PrevInSection }}
+            <li class="page-item">
+                <a class="page-link" href="{{ .Permalink }}">{{ .Title }}</a> 
+            </li>
+            <li class="page-item disabled">
+                <a class="page-link">下一篇</a>
+            </li>
+        {{ end }}
+
+    </ul>
+</nav>
+{{ end }}

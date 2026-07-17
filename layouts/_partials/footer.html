@@ -1,0 +1,48 @@
+<footer class="py-2" style="margin-top: 2rem !important;">
+    <div class="container border-top">
+
+        <!-- 主题与驱动 -->
+        <ul class="nav justify-content-center pb-3"  style="margin-top: 22px;">
+            <li class="nav-item">
+                <span>
+                    &nbsp&nbsp
+                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path fill="currentColor" d="M512 256c0 .9 0 1.8 0 2.7c-.4 36.5-33.6 61.3-70.1 61.3H344c-26.5 0-48 21.5-48 48c0 3.4 .4 6.7 1 9.9c2.1 10.2 6.5 20 10.8 29.9c6.1 13.8 12.1 27.5 12.1 42c0 31.8-21.6 60.7-53.4 62c-3.5 .1-7 .2-10.6 .2C114.6 512 0 397.4 0 256S114.6 0 256 0S512 114.6 512 256zM128 288a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm0-96a32 32 0 1 0 0-64 32 32 0 1 0 0 64zM288 96a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm96 96a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/></svg>
+                    <a href="https://github.com/enjoy61/tess/" style="text-decoration: none;">Tess</a>
+                    &nbsp&nbsp
+                </span>
+            </li>
+            <li class="nav-item">
+                <span>
+                    &nbsp&nbsp
+                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="18" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path fill="currentColor" d="M96 0C78.3 0 64 14.3 64 32v96h64V32c0-17.7-14.3-32-32-32zM288 0c-17.7 0-32 14.3-32 32v96h64V32c0-17.7-14.3-32-32-32zM32 160c-17.7 0-32 14.3-32 32s14.3 32 32 32v32c0 77.4 55 142 128 156.8V480c0 17.7 14.3 32 32 32s32-14.3 32-32V412.8c12.3-2.5 24.1-6.4 35.1-11.5c-2.1-10.8-3.1-21.9-3.1-33.3c0-80.3 53.8-148 127.3-169.2c.5-2.2 .7-4.5 .7-6.8c0-17.7-14.3-32-32-32H32zM432 512a144 144 0 1 0 0-288 144 144 0 1 0 0 288zm47.9-225c4.3 3.7 5.4 9.9 2.6 14.9L452.4 356H488c5.2 0 9.8 3.3 11.4 8.2s-.1 10.3-4.2 13.4l-96 72c-4.5 3.4-10.8 3.2-15.1-.6s-5.4-9.9-2.6-14.9L411.6 380H376c-5.2 0-9.8-3.3-11.4-8.2s.1-10.3 4.2-13.4l96-72c4.5-3.4 10.8-3.2 15.1 .6z"/></svg>
+                    <a href="https://gohugo.io/" style="text-decoration: none;">Hugo</a>
+                    &nbsp&nbsp
+                </span>
+            </li>
+        </ul>
+
+        <!-- 版权声明 -->
+        <p class="text-center mb-3 footer-link" xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+            <a property="dct:title" rel="cc:attributionURL" href="https://enjoy61.com" style="text-decoration: none;">六一的部落格</a>
+            <a class="text-muted" style="text-decoration: none;">© 2023-2026</a>
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;text-decoration: none;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1">
+            </a>
+        </p>
+
+        <!-- 运行时间 -->
+        <p class="text-center">
+            <span>
+                <i class="fa-solid fa-gear fa-spin" style="--fa-animation-duration: 3s; "></i>
+                <a class="running" id="running-time" style="text-decoration: none;"></a>
+            </span>
+        </p>
+
+    </div>
+</footer>
+
+
+<!-- 运行时间 -->
+{{ $built := resources.Get "js/running-time.js" | js.Build "main-running-time.js" | minify | fingerprint "sha512" }}
+{{ with $built }}
+    <script src="{{ $built.RelPermalink }}" integrity="{{ $built.Data.Integrity }}" crossorigin="anonymous"></script>
+{{ end }}

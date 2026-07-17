@@ -1,0 +1,41 @@
+pre {
+  // word-wrap: break-word; /* 兼容老旧浏览器，防止长单词溢出 */
+  
+  // 自动换行，保留空格
+  white-space: pre-wrap;
+
+}
+
+
+.pre-lang {
+  color: #edf2ed;
+  font-family: "VictorMonoNerdFont";
+}
+
+.pre-text {
+  color: #000000;
+}
+
+pre {
+  margin-block: 0rem 0rem;
+}
+.copy-code {
+  font-family: "VictorMonoNerdFont";
+  float: right;
+  background-color: transparent;
+  border: none;
+  display: inline;
+  font-size: 13px;
+}
+
+.code-header
+{
+
+}
+
+.card-body span
+{
+  font-family: "VictorMonoNerdFont";
+  font-size: 14px;
+}
+

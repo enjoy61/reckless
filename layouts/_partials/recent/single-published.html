@@ -1,0 +1,55 @@
+{{ $year_format := "2006" }}
+{{ $month_format := "January" }}
+{{ $day_format := "_2" }}
+{{ $last_year_val := "" }}
+{{ $last_month_val := "" }}
+{{ $last_day_val := "" }}
+{{ $format := ":date_medium" }}      
+
+{{ $sections := slice "lessons-learned" "reading-notes" "online-course-notes"}}
+
+
+<div class="recent-style div-recent">
+	    {{ range where .Site.RegularPages.ByPublishDate.Reverse "Section" "in" $sections }}
+	        {{ $current_target := .PublishDate }}
+	        {{ $year_val := $current_target | time.Format $year_format }}
+	        {{ $month_val := $current_target | time.Format $month_format }}
+	        {{ $day_val := $current_target | time.Format $day_format }}
+
+	        {{ if ne $last_year_val $year_val }}
+	            {{ $last_year_val = $year_val }}
+	            {{ $last_month_val = "" }}
+	        {{ end }}
+
+	        {{ if ne $last_month_val $month_val }}
+	            {{ $last_month_val = $month_val }}
+	            {{ $last_day_val = "" }}
+	        {{ end }}
+
+	        {{ if ne $last_day_val $day_val }}
+	            <br>
+	            
+	            <h3> &thinsp; {{ $current_target | time.Format $format }} {{ $current_target | time.Format "  Mon"  }} </h3>
+
+	            {{ $last_day_val = $day_val }}
+	        {{ end }}
+
+	        <h6> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+	        	{{ if eq .Section "lessons-learned" }}
+				<nobr><b>经验总结</b></nobr>
+				{{ else if eq .Section "reading-notes" }}
+				<nobr><b>读书笔记</b></nobr>  
+				{{ else if eq .Section "online-course-notes" }}
+				<nobr><b>在线课程笔记</b></nobr>     
+				{{ end }}
+	            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="10" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path fill="currentColor" d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg>
+	            
+	            {{ range after 2 .Ancestors.Reverse }}
+	                {{ .LinkTitle }}
+	                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="10" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path fill="currentColor" d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg>
+	            {{ end }}
+	            <a href="{{ .Permalink }}">{{ .Title }}</a>
+	        </h6>
+	    {{ end }}
+	
+</div>
