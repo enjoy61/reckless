@@ -6,8 +6,7 @@
 {{ $last_day_val := "" }}
 {{ $format := ":date_medium" }}      
 
-{{ $sections := slice "lessons-learned" "reading-notes" "online-course-notes"}}
-
+{{ $sections := slice "fragments" "study-notes" "online-course-notes" "misc" }}
 
 <div class="recent-style div-recent">
 	    {{ range where .Site.RegularPages.ByPublishDate.Reverse "Section" "in" $sections }}
@@ -35,12 +34,14 @@
 	        {{ end }}
 
 	        <h6> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-	        	{{ if eq .Section "lessons-learned" }}
-				<nobr><b>经验总结</b></nobr>
-				{{ else if eq .Section "reading-notes" }}
-				<nobr><b>读书笔记</b></nobr>  
+	        	{{ if eq .Section "fragments" }}
+				<nobr><b>知识点碎片</b></nobr>
+				{{ else if eq .Section "study-notes" }}
+				<nobr><b>学习笔记</b></nobr>  
 				{{ else if eq .Section "online-course-notes" }}
 				<nobr><b>在线课程笔记</b></nobr>     
+				{{ else if eq .Section "misc" }}
+				<nobr><b>杂项</b></nobr>     
 				{{ end }}
 	            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="10" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path fill="currentColor" d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg>
 	            

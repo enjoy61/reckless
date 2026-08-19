@@ -1,3 +1,13 @@
+// $teal-blue: #008080;
+$teal-blue: rgb(0, 128, 128);
+$teal-blue-30: rgba(0, 128, 128, 0.3);
+$frost-green: #94A08B;
+$leaf-green: #2D5A27;
+$turquoise-green: #00694c;
+$creole: #211008;
+$residue-brown: #3E230E;
+$rowan-red: #b11c12;
+
 /* header */
 $lavender-violet: #767ba5;
 $light-green: #659A82;
@@ -7,19 +17,54 @@ $sky-blue: #94ccec;
 
 
 /* 主页标题栏 */
-$header-bg: $sky-blue;
+$header-bg: $teal-blue;
 $header-text-color: white;
-$header-hover-color: $msb-yellow;
+$header-hover-color: $residue-brown;
 
 /* 全局导航栏 */
-$menu-hover: $xcl-yellow;
-$menu-text-color: black;
+$menu-hover: $residue-brown;
+$menu-text-color: $creole;
 
+/* 最近列表 */
+$recent-hover: $residue-brown;
+$recent-link: $creole;
 
+$recent-header-hover: $residue-brown;
+$recent-header-link: $creole;
 
-.container {
+/* 文章目录 */
+$toc-link: $creole;
+$toc-hover: $residue-brown;
+$toc-active: $turquoise-green;
+
+/* footer */
+$footer-link: $creole;
+$footer-hover: $residue-brown;
+
+/* breadcrumb */
+$breadcrumb-link: $creole;
+$breadcrumb-hover: $residue-brown;
+
+/* pagination */
+$page-link: $creole;
+$page-hover: $residue-brown;
+
+/* anchor */
+$anchor-link: $creole;
+$anchor-hover: $residue-brown;
+
+/* list */
+$list-button-link: $creole;
+$list-button-hover: $residue-brown;
+$list-link: $teal-blue;
+$list-hover: $residue-brown;
+$list-active: $creole;
+
+/* bg hover */
+$bg-hover-color: $teal-blue-30;
+//.container {
     // max-width: 2160px;
-}
+//}
 
 /* 主页标题栏 */
 .header-reckless {
@@ -29,11 +74,12 @@ $menu-text-color: black;
     margin-top: 20px;
 
     h1 {
-	 color: $header-text-color;
+        color: $header-text-color;
 
-    &:hover {
-        color: $header-hover-color;
-    }
+        &:hover {
+            color: $header-hover-color;
+            // font-weight: 330;
+        }
     }
 }
 
@@ -44,6 +90,18 @@ $menu-text-color: black;
     content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" height="14" width="12.25" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path fill="currentColor" d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>');
     transition: transform .35s ease;
     transform-origin: .5em 50%;
+}
+
+.menu-hover-bg {
+     &:hover {
+        background: repeating-linear-gradient(
+            135deg,
+            white,
+            white 5px,
+            $bg-hover-color 5px,
+            $bg-hover-color 6px
+        );
+        }
 }
 
 .nav-item-style {
@@ -64,50 +122,68 @@ $menu-text-color: black;
 }
 
 /* 最近列表 */
-
 .recent-style {
     text-align: start;
 
 	a {
 		text-decoration: none;
-		color: blue;
+		color: $recent-link;
         &:hover {
-            color: $xcl-yellow;
+            color: $recent-link;
+
+            background: repeating-linear-gradient(
+                135deg,
+                white,
+                white 5px,
+                $bg-hover-color 5px,
+                $bg-hover-color 6px
+            );
         }
-	}
-
-	h2 {
-		a {
-		text-decoration: none;
-		color: red;
-		}
-
-		a:hover {
-			color: red;
-		}
 	}
 }
 
+.recent-header-color
+{
+    color: $recent-header-link;
+    &:hover {
+        color: $recent-header-hover;
+    }
+}
 
 
-/* */
+/* 文章目录 */
 div.toc-panel {
 	a {
-		color: black;
+		color: $toc-link;
 	 	text-decoration: none;
         font-size: 14px;
+        font-weight: 500;
+        
 	}
 
     a:hover {
-        color: red;
+        color: $toc-link;
     }
 
 
 	a.active {
-		color: orange;
+		color: $toc-active;
         // font-weight: 800;
         transition: all .25s ease-in-out;
 	}
+}
+
+.toc-hover {
+    // font-family: "GlowSansSC-Book";
+    &:hover {
+        background: repeating-linear-gradient(
+                135deg,
+                white,
+                white 5px,
+                $bg-hover-color 5px,
+                $bg-hover-color 6px
+            );
+    }
 }
 
 .toc-btn-toggle
@@ -152,14 +228,15 @@ body {
 /* 自定义有序列表样式 */
 @counter-style icon-numbers {
   system: cyclic;
-  symbols: "🔷" "🔶";
+  symbols: "🔹" "🔸";
+  // symbols: "🔷" "🔶";
   suffix: " ";
 }
 
 /* 自定义有序列表样式 */
 @counter-style enclosed-numbers {
   system: cyclic;
-  symbols: "1️⃣" "2️⃣" "3️⃣" "4️⃣" "5️⃣" "6️⃣" "7️⃣" "8️⃣" "9️⃣" "🔟";
+  symbols: "1️⃣" "2️⃣" "3️⃣" "4️⃣" "5️⃣" "6️⃣" "7️⃣" "8️⃣" "9️⃣" "🔟" "1️⃣1️⃣" "1️⃣2️⃣";
   suffix: " ";
 }
 
@@ -243,16 +320,15 @@ $card-bg-color: rgba(13, 202, 240, 0.3);
 .div-recent {
 	cursor: default;
 		a {
-				// color: $primary;
-				text-decoration: none;
+            // color: $primary;
+            text-decoration: none;
 		}
 
 		a:hover {
-				// color: $whole-hover;
+            // color: $whole-hover;
 		}
 
 		h3 {
-            
 				padding-bottom: 10px;
 		}
 
@@ -297,6 +373,88 @@ $card-bg-color: rgba(13, 202, 240, 0.3);
     &:hover {
         &::-webkit-scrollbar-thumb {
         background-color: rgba(0, 0, 0, 0.3); // 半透明灰色滑块
+        }
+    }
+}
+
+
+/* 图片 */
+figure img {
+    max-width: 60rem;
+}
+
+
+.footer-color {
+    color: $footer-link;
+    &:hover {
+        color: $footer-hover;
+    }
+}
+
+
+.breadcrumb-color {
+    color: $breadcrumb-link;
+    &:hover {
+        color: $breadcrumb-hover;
+    }
+}
+
+.page-color {
+    color: $page-link;
+    &:hover {
+        color: $page-hover;
+        background-color: transparent;
+    }
+}
+
+.anchor-color {
+    color: $anchor-link;
+    &:hover {
+        color: $anchor-hover;
+    }
+}
+
+.list-color {
+    color: $list-link;
+    &:hover {
+        color: $list-hover;
+
+    }
+    
+}
+
+.sidebar-current {
+    color: $list-active;
+}
+
+$list-button-active: $card-bg-color;
+.list-button-color {
+    color: $list-button-link;
+    &:hover {
+        color: $list-button-hover;
+    }
+    &:focus {
+        box-shadow: none;  
+    }
+    &:not(.collapsed) {
+        //color: purple;
+        color: $list-button-link;
+        font-weight: bold;
+        background-color: transparent;
+        box-shadow: none;
+
+        // border-color: $card-primary-color;
+        // border-bottom-color: $creole;
+        background: repeating-linear-gradient(
+            135deg,
+            white,
+            white 5px,
+            $bg-hover-color 5px,
+            $bg-hover-color 6px
+        );
+       
+         &::after {
+           
         }
     }
 }

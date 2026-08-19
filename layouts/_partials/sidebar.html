@@ -1,6 +1,75 @@
-{{ range where .Site.Sections "Section" "online-course-notes" }}
-   {{ partial "chapters.html" (dict "InputEntries" .Pages "Type" "sidebar") }}
-{{ end }}
+<div class="sidebar accordion accordion-flush" id="sidebar">
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed list-button-color" type="button" data-bs-toggle="collapse" data-bs-target="#section-study-notes" aria-expanded="true" aria-controls="section-study-notes">
+                学习笔记
+            </button>
+        </h2>
+
+        <div id="section-study-notes" class="accordion-collapse collapse" data-bs-parent="#sidebar">
+            <div class="accordion-body">
+            {{ range where .Site.Sections "Section" "study-notes" }}
+                {{ partial "chapters-hybrid.html" (dict "InputEntries" .Pages "Type" "sidebar2") }}
+            {{ end }}
+            </div>
+        </div>
+    </div>
+    
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed list-button-color" type="button" data-bs-toggle="collapse" data-bs-target="#section-online-course-notes" aria-expanded="true" aria-controls="section-online-course-notes">
+                在线课程笔记
+            </button>
+        </h2>
+
+        <div id="section-online-course-notes" class="accordion-collapse collapse" data-bs-parent="#sidebar">
+            <div class="accordion-body">
+            {{ range where .Site.Sections "Section" "online-course-notes" }}
+                {{ partial "chapters-hybrid.html" (dict "InputEntries" .Pages "Type" "sidebar1") }}
+            {{ end }}
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed list-button-color" type="button" data-bs-toggle="collapse" data-bs-target="#section-fragments" aria-expanded="true" aria-controls="section-fragments">
+                知识点碎片
+            </button>
+        </h2>
+
+        <div id="section-fragments" class="accordion-collapse collapse" data-bs-parent="#sidebar">
+            <div class="accordion-body">
+            {{ range where .Site.Sections "Section" "fragments" }}
+                {{ partial "chapters-hybrid.html" (dict "InputEntries" .Pages "Type" "sidebar3") }}
+            {{ end }}
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed list-button-color" type="button" data-bs-toggle="collapse" data-bs-target="#section-misc" aria-expanded="true" aria-controls="section-misc">
+               杂项 
+            </button>
+        </h2>
+
+        <div id="section-misc" class="accordion-collapse collapse" data-bs-parent="#sidebar">
+            <div class="accordion-body">
+            {{ range where .Site.Sections "Section" "misc" }}
+                {{ partial "chapters-hybrid.html" (dict "InputEntries" .Pages "Type" "sidebar4") }}
+            {{ end }}
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+
+
+
+
 
 
 {{ $built := resources.Get "js/sidebar.js" | js.Build "main-sidebar.js" | minify | fingerprint "sha512" }}

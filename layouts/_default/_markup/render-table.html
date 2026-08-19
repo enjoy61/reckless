@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover" style="width: fit-content;"  
+<table class="table table-striped table-hover" style="width: fit-content; margin-bottom: 40px;"  
   {{- range $k, $v := .Attributes }}
     {{- if $v }}
       {{- printf " %s=%q" $k $v | safeHTMLAttr }}

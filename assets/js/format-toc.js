@@ -26,7 +26,7 @@ function format_a(heading, class_content, descript, circle_color)
     temp += format_attribute("class", class_content);
     temp += ">";
     temp += format_span(circle_color);
-    temp += " &nbsp " + descript;
+    temp += " &nbsp " + "<span class=\"toc-hover\">" + descript + "</span>";
     temp += "</a>";
 
     return temp;
@@ -66,7 +66,7 @@ function format_button_a(descript, a_class, heading)
     temp += ">";
 
     temp += format_span("bg-success");
-    temp += " &nbsp " + descript;
+    temp += " &nbsp " + "<span class=\"toc-hover\">" + descript + "</span>";
 
     temp += "</a>";
     return temp;
@@ -259,6 +259,9 @@ function add_toc()
 
     if (headings.length < 1)
     {
+        const toc_card = document.getElementById("toc-card");console.log(toc_card.style);
+        toc_card.style.display = "none";
+
         return;
     }
     const toc = format_toc(headings);

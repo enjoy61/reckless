@@ -8,13 +8,13 @@
         </li>
 
         <li class="page-item"> 
-            <a class="page-link" href="{{ .Permalink }}">{{ .Title }}</a>
+            <a class="page-link page-color" href="{{ .Permalink }}">{{ .Title }}</a>
         </li>
         {{ end }}
 
         {{ with .PrevInSection }}
             <li class="page-item">
-                <a class="page-link" href="{{ .Permalink }}">{{ .Title }}</a> 
+                <a class="page-link page-color" href="{{ .Permalink }}">{{ .Title }}</a> 
             </li>
             <li class="page-item disabled">
                 <a class="page-link">下一篇</a>
