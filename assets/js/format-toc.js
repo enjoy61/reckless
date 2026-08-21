@@ -1,95 +1,102 @@
-function format_attribute(attribute, content)
-{
-    temp = attribute;
-    temp += "=\"" + content + "\"";
-    return temp;
+function format_attribute(attribute, content) {
+  temp = attribute;
+  temp += '="' + content + '"';
+  return temp;
 }
 
-function format_span(circle_color)
-{
-    temp = "<span ";
-    temp += format_attribute("class", "d-inline-block rounded-circle " + circle_color);
-    temp += format_attribute("style", "width: .5em; height: .5em; flex-shrink: 0; ");
-    temp += "></span>";
+function format_span(circle_color) {
+  temp = "<span ";
+  temp += format_attribute(
+    "class",
+    "d-inline-block rounded-circle " + circle_color,
+  );
+  temp += format_attribute(
+    "style",
+    "width: .5em; height: .5em; flex-shrink: 0; ",
+  );
+  temp += "></span>";
 
-    return temp;
+  return temp;
 }
 
-function format_a(heading, class_content, descript, circle_color)
-{
-    temp = "<a ";
+function format_a(heading, class_content, descript, circle_color) {
+  temp = "<a ";
 
-    href_content = "#" + heading;
-    temp += format_attribute("href", href_content);
+  href_content = "#" + heading;
+  temp += format_attribute("href", href_content);
 
-    temp += " ";
-    temp += format_attribute("class", class_content);
-    temp += ">";
-    temp += format_span(circle_color);
-    temp += " &nbsp " + "<span class=\"toc-hover\">" + descript + "</span>";
-    temp += "</a>";
+  temp += " ";
+  temp += format_attribute("class", class_content);
+  temp += ">";
+  temp += format_span(circle_color);
+  temp += " &nbsp " + '<span class="toc-hover">' + descript + "</span>";
+  temp += "</a>";
 
-    return temp;
+  return temp;
 }
 
-function format_li(heading, descript, circle_color)
-{
-    temp = "<li ";
-    temp += format_attribute("class", "mb-1 my-1 ms-3");
-    temp += ">";
-    temp += format_a(heading, "rounded align-items-baseline", descript, circle_color);
-    temp += "</li>";
+function format_li(heading, descript, circle_color) {
+  temp = "<li ";
+  temp += format_attribute("class", "mb-1 my-1 ms-3");
+  temp += ">";
+  temp += format_a(
+    heading,
+    "rounded align-items-baseline",
+    descript,
+    circle_color,
+  );
+  temp += "</li>";
 
-    return temp;
+  return temp;
 }
 
-function format_li_start(class_content)
-{
-    temp = "<li ";
-    temp += format_attribute("class", class_content);
-    temp += ">";
+function format_li_start(class_content) {
+  temp = "<li ";
+  temp += format_attribute("class", class_content);
+  temp += ">";
 
-    return temp;
+  return temp;
 }
 
-function format_button_a(descript, a_class, heading)
-{
-    temp = "<a ";
+function format_button_a(descript, a_class, heading) {
+  temp = "<a ";
 
-    href_content = "#" + heading;
-    temp += format_attribute("href", href_content);
+  href_content = "#" + heading;
+  temp += format_attribute("href", href_content);
 
-    temp += " ";
-    temp += format_attribute("class", a_class + " " +
-                                          "align-items-baseline");
+  temp += " ";
+  temp += format_attribute("class", a_class + " " + "align-items-baseline");
 
-    temp += ">";
+  temp += ">";
 
-    temp += format_span("bg-success");
-    temp += " &nbsp " + "<span class=\"toc-hover\">" + descript + "</span>";
+  temp += format_span("bg-success");
+  temp += " &nbsp " + '<span class="toc-hover">' + descript + "</span>";
 
-    temp += "</a>";
-    return temp;
+  temp += "</a>";
+  return temp;
 }
 
-function format_button_toogle(class_content, if_toggle, toggle_target, expanded_value)
-{
+function format_button_toogle(
+  class_content,
+  if_toggle,
+  toggle_target,
+  expanded_value,
+) {
+  temp = "<button ";
+  temp += format_attribute("class", class_content);
 
-    temp = "<button ";
-    temp += format_attribute("class", class_content);
+  temp += " ";
+  temp += format_attribute("data-bs-toggle", if_toggle);
 
-    temp += " ";
-    temp += format_attribute("data-bs-toggle", if_toggle);
+  temp += " ";
+  temp += format_attribute("data-bs-target", toggle_target);
 
-    temp += " ";
-    temp += format_attribute("data-bs-target", toggle_target);
+  temp += " ";
+  temp += format_attribute("aria-expanded", expanded_value);
 
-    temp += " ";
-    temp += format_attribute("aria-expanded", expanded_value);
+  temp += "></button>";
 
-    temp += "></button>";
-
-    return temp;
+  return temp;
 }
 /*
 function format_button(class_content, if_toggle, toggle_target, expanded_value, descript, a_class, heading)
@@ -115,55 +122,52 @@ function format_button(class_content, if_toggle, toggle_target, expanded_value, 
     return temp;
 }
 */
-function format_div_start(id)
-{
-    temp = "<div ";
+function format_div_start(id) {
+  temp = "<div ";
 
-    /* 默认不展开， 添加show可以展开 */
-    temp += format_attribute("class", "collapse");
+  /* 默认不展开， 添加show可以展开 */
+  temp += format_attribute("class", "collapse");
 
-    temp += " ";
-    temp += format_attribute("id", id);
+  temp += " ";
+  temp += format_attribute("id", id);
 
-    temp += ">";
+  temp += ">";
 
-    return temp;
+  return temp;
 }
 
-function format_ul_start(class_content)
-{
-    temp = "<ul ";
+function format_ul_start(class_content) {
+  temp = "<ul ";
 
-    temp += format_attribute("class", class_content);
+  temp += format_attribute("class", class_content);
 
-    temp += ">";
+  temp += ">";
 
-    return temp;
+  return temp;
 }
 
-function button_pack_start(heading, descript)
-{
-    temp = format_li_start("mb-1 my-1 ms-3");
+function button_pack_start(heading, descript) {
+  temp = format_li_start("mb-1 my-1 ms-3");
 
-    toggle_target_id = "toc-" + heading;
-    toggle_target = "#" + toggle_target_id;
+  toggle_target_id = "toc-" + heading;
+  toggle_target = "#" + toggle_target_id;
 
-    a_class = "rounded";
+  a_class = "rounded";
 
-    temp += format_button_a(descript, a_class, heading);
+  temp += format_button_a(descript, a_class, heading);
 
-    temp += format_button_toogle(
-        "toc-btn-toggle rounded collapsed",
-        "collapse",
-        toggle_target,
-        "false",
-    );
+  temp += format_button_toogle(
+    "toc-btn-toggle rounded collapsed",
+    "collapse",
+    toggle_target,
+    "false",
+  );
 
-    temp += format_div_start(toggle_target_id);
+  temp += format_div_start(toggle_target_id);
 
-    temp += format_ul_start("btn-toggle-nav list-unstyled fw-normal pb-1");
+  temp += format_ul_start("btn-toggle-nav list-unstyled fw-normal pb-1");
 
-    return temp;
+  return temp;
 }
 
 /*
@@ -186,86 +190,82 @@ function format_button(id)
 }
 */
 
-function button_pack_close() /* close_button */
-{
-    temp = "";
-    temp += "</ul>";
-    temp += "</div>";
-    temp += "</li>";
-    return temp;
+function button_pack_close /* close_button */() {
+  temp = "";
+  temp += "</ul>";
+  temp += "</div>";
+  temp += "</li>";
+  return temp;
 }
 
-function format_toc(headings)
-{
-    toc = "<div class=\"flex-shrink-0 toc-sticky\">\n";
-    toc += "<ul class=\"list-unstyled ps-0\">\n"
+function format_toc(headings) {
+  toc = '<div class="flex-shrink-0 toc-sticky">\n';
+  toc += '<ul class="list-unstyled ps-0">\n';
 
-    for (i = 1; i < headings.length; ++i)
-    {
-        tag_next = parseInt(headings[i].tagName[1]);
+  for (i = 1; i < headings.length; ++i) {
+    tag_next = parseInt(headings[i].tagName[1]);
 
-        heading = headings[i - 1];
-        // console.log(heading.innerText.replace(" #", ""));
+    heading = headings[i - 1];
+    // console.log(heading.innerText.replace(" #", ""));
 
-        id = heading.getAttribute('id');
-        tag = parseInt(heading.tagName[1]);
-        descript = heading.innerText.replace(" #", "");
-
-        if (tag_next > tag)
-        {
-            // toc += format_button(id);
-            toc += button_pack_start(id, descript);
-        }
-        else
-        {
-            // toc += format_li(id);
-            toc += format_li(id, descript, "bg-primary") + "\n";
-            // console.log(tag_next, tag, descript);
-            if (tag_next < tag)
-            {
-                for (j = 0; j < tag - tag_next; ++j)
-                {
-                    // toc += close_button();
-                    toc += button_pack_close() + "\n";
-                }
-            }
-        }
-    }
-
-    heading = headings[headings.length - 1];
-    id = heading.getAttribute('id');
+    id = heading.getAttribute("id");
     tag = parseInt(heading.tagName[1]);
     descript = heading.innerText.replace(" #", "");
 
-    // toc += format_li(id_next);
-    toc += format_li(id, descript, "bg-primary");
-    for (j = 0; j < tag - 2; ++j)
-    {
-        // toc += close_button();
-        toc += button_pack_close() + "\n";
+    if (tag_next > tag) {
+      // toc += format_button(id);
+      toc += button_pack_start(id, descript);
+    } else {
+      // toc += format_li(id);
+      toc += format_li(id, descript, "bg-primary") + "\n";
+      // console.log(tag_next, tag, descript);
+      if (tag_next < tag) {
+        for (j = 0; j < tag - tag_next; ++j) {
+          // toc += close_button();
+          toc += button_pack_close() + "\n";
+        }
+      }
     }
+  }
 
-    toc += "</ul></div>\n";
+  heading = headings[headings.length - 1];
+  id = heading.getAttribute("id");
+  tag = parseInt(heading.tagName[1]);
+  descript = heading.innerText.replace(" #", "");
 
-    // console.log(toc);
+  // toc += format_li(id_next);
+  toc += format_li(id, descript, "bg-primary");
+  for (j = 0; j < tag - 2; ++j) {
+    // toc += close_button();
+    toc += button_pack_close() + "\n";
+  }
 
-    return toc;
+  toc += "</ul></div>\n";
+
+  // console.log(toc);
+
+  return toc;
 }
 
-function add_toc()
-{
-    const headings = Array.apply(null, document.querySelectorAll('h2[id], h3[id], h4[id], h5[id]'))
-                         .filter(function(value, index, arr) { return arr[index].querySelector('.anchor'); });
+function add_toc() {
+  const headings = Array.apply(
+    null,
+    document.querySelectorAll("h2[id], h3[id], h4[id], h5[id]"),
+  ).filter(function (value, index, arr) {
+    return arr[index].querySelector(".anchor");
+  });
 
-    if (headings.length < 1)
-    {
-        const toc_card = document.getElementById("toc-card");console.log(toc_card.style);
-        toc_card.style.display = "none";
+  if (headings.length < 1) {
+    const toc_card = document.getElementById("toc-card");
+    console.log(toc_card.style);
+    toc_card.style.display = "none";
 
-        return;
-    }
-    const toc = format_toc(headings);
-    document.write(toc);
+    return;
+  }
+  const toc = format_toc(headings);
+
+  const toc_element = document.getElementById("toc-box");
+  toc_element.innerHTML = toc;
 }
 
 add_toc();

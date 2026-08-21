@@ -1,13 +1,7 @@
-{{ define "main" }}
-<div class="container">
-  {{ if or (eq .Section "online-course-notes") (eq .Section "study-notes") (eq .Section "fragments") (eq .Section "misc") }}
-    {{ partial "body/note.html" . }}
-  {{ else if eq .Section "recent" }}
-    {{ partial "body/recent-body.html" . }}
-  {{ else if eq .Section "about" }}
-    {{ partial "body/about-body.html" . }}
-  {{ end }}
-
-  {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
-</div>
-{{ end }}
+{{ define "main" }} {{ if or (eq .Section "online-course-notes") (eq .Section
+"study-notes") (eq .Section "fragments") (eq .Section "misc") }} {{ partial
+"body/note.html" . }} {{ else if eq .Section "recent" }}
+<div class="container">{{ partial "body/recent-body.html" . }}</div>
+{{ else if eq .Section "about" }}
+<div class="container">{{ partial "body/about-body.html" . }}</div>
+{{ end }} {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }} {{ end }}

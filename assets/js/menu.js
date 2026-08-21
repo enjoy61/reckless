@@ -1,23 +1,19 @@
 const url = window.location.pathname;
 
-var arr = url.split('/');
+var arr = url.split("/");
 
-for (i = 0; i < arr.length; ++i)
-{
-    var cur = arr[i];
-    if (cur !== "")
-    {
-        console.log(cur);
-        break;
-    }
+for (i = 0; i < arr.length; ++i) {
+  var cur = arr[i];
+  if (cur !== "") {
+    console.log(cur);
+    break;
+  }
 }
 
-if (cur)
-{
-    const nav_item = document.getElementById(cur);
-    if (nav_item)
-    {
-        console.log("ddd", nav_item);
-        nav_item.classList.add('active');
-    }
+if (cur) {
+  const nav_item = document.getElementById(cur);
+  if (nav_item) {
+    console.log("ddd", nav_item);
+    nav_item.classList.add("active");
+  }
 }

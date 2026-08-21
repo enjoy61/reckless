@@ -1,11 +1,12 @@
 <!-- 导入SCSS -->
-{{ $opts := dict
-    "enableSourceMap" true
-    "outputStyle" (cond hugo.IsDevelopment "expanded" "compressed")
-    "targetPath" "css/style.css"
-    "transpiler" "dartsass"
-    "vars" site.Params.styles
-}}
-{{ with resources.Get "scss/app.scss" | css.Sass $opts | minify | fingerprint }}
-<link rel="stylesheet"  href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+{{ $opts := dict "enableSourceMap" true "outputStyle" (cond hugo.IsDevelopment
+"expanded" "compressed") "targetPath" "css/style.css" "transpiler" "dartsass"
+"vars" site.Params.styles }} {{ with resources.Get "scss/app.scss" | css.Sass
+$opts | minify | fingerprint }}
+<link
+  rel="stylesheet"
+  href="{{ .RelPermalink }}"
+  integrity="{{ .Data.Integrity }}"
+  crossorigin="anonymous"
+/>
 {{ end }}

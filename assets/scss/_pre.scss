@@ -1,11 +1,9 @@
 pre {
   // word-wrap: break-word; /* 兼容老旧浏览器，防止长单词溢出 */
-  
+
   // 自动换行，保留空格
   white-space: pre-wrap;
-
 }
-
 
 .pre-lang {
   color: #edf2ed;
@@ -28,14 +26,16 @@ pre {
   font-size: 13px;
 }
 
-.code-header
-{
-
+.code-header {
 }
 
-.card-body span
-{
+.card-body span {
   font-family: "VictorMonoNerdFont";
   font-size: 14px;
 }
 
+.card {
+  // scrollbar-color: rgba(106, 116, 160, 0.3) transparent;
+  scrollbar-color: rgba(240, 255, 255, 0.3) transparent;
+  scrollbar-width: thin;
+}

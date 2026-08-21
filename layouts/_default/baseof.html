@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html lang="{{ site.Language.Locale }}" dir="{{ or site.Language.Direction `ltr` }}">
+<!doctype html>
+<html
+  lang="{{ site.Language.Locale }}"
+  dir="{{ or site.Language.Direction `ltr` }}"
+>
   <head>
     {{ partial "head-reckless.html" . }}
   </head>
   <body>
-    <header>
-      {{ partial "header.html" . }}
-    </header>
+    <header>{{ partial "header.html" . }}</header>
     <main>
-      {{ partial "navigation.html" . }}
-
-      {{ block "main" . }}
-      {{ end }}
+      {{ partial "navigation.html" . }} {{ block "main" . }} {{ end }}
     </main>
-    <footer>
-      {{ partial "footer.html" . }}
-    </footer>
+    <footer>{{ partial "footer.html" . }}</footer>
   </body>
 </html>
